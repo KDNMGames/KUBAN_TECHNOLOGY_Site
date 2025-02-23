@@ -1,284 +1,82 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KUBAN TECHNOLOGY</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <meta name="description" content="Professional tools for game development">
-    <style>
-        /* Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            background: #1a1a1a;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Header Styles */
-        header {
-            height: 300px;
-            background: #000;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sunflower {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            background: radial-gradient(#FFD700 60%, #8B8000);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .sunflower::after {
-            content: '';
-            position: absolute;
-            width: 120%;
-            height: 20px;
-            background: #228B22;
-            top: 110%;
-            left: -10%;
-            border-radius: 10px;
-        }
-
-        .header-title {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 3em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            z-index: 2;
-            white-space: nowrap;
-        }
-
-        /* Widgets Section */
-        .widgets-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            flex-grow: 1;
-        }
-
-        .widget {
-            background: #333;
-            border-radius: 10px;
-            position: relative;
-            cursor: pointer;
-            transition: transform 0.3s;
-            overflow: hidden;
-            min-height: 250px;
-        }
-
-        .widget:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Badges */
-        .badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8em;
-            z-index: 2;
-        }
-
-        .unity-badge {
-            background: #007bff;
-            color: white;
-        }
-
-        .indev-badge {
-            background: #ff0000;
-            color: white;
-            transition: all 0.3s ease;
-        }
-
-        /* Widget Content */
-        .widget-content {
-            padding: 1.5rem;
-            position: relative;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .asset-preview {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-            padding: 0 1rem;
-        }
-
-        .promo-text {
-            font-size: 0.9em;
-            line-height: 1.6;
-            opacity: 0;
-            transition: opacity 0.3s 0.2s;
-        }
-
-        .widget:hover .promo-text {
-            opacity: 1;
-        }
-
-        /* InDev Widget Effects */
-        .indev-widget .widget-content {
-            transition: opacity 0.3s;
-        }
-
-        .indev-widget:hover .widget-content {
-            opacity: 0;
-        }
-
-        .indev-widget:hover .indev-badge {
-            font-size: 2em;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Footer Styles */
-        footer {
-            background: #000;
-            padding: 2rem;
-            text-align: center;
-            margin-top: auto;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .social-link {
-            color: white;
-            font-size: 1.5rem;
-            padding: 10px;
-            border-radius: 50%;
-            transition: background 0.3s;
-            text-decoration: none;
-        }
-
-        /* Animations */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 2em;
-            }
-
-            .widgets-container {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-            
-            .promo-text {
-                font-size: 0.8em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div class="sunflower" style="top: 20%; left: 15%"></div>
-        <div class="sunflower" style="top: 30%; right: 20%"></div>
-        <h1 class="header-title">KUBAN TECHNOLOGY</h1>
+    <header class="main-header">
+        <div class="sky-background">
+            <div class="sun"></div>
+            <div class="clouds"></div>
+        </div>
+        <h1>KUBAN TECHNOLOGY</h1>
+        <nav class="header-nav">
+            <button onclick="scrollToSection('about')">About</button>
+            <button onclick="scrollToSection('projects')">Projects</button>
+            <button onclick="scrollToSection('contacts')">Contacts</button>
+        </nav>
+        <div class="sunflowers"></div>
     </header>
 
-    <div class="widgets-container">
-        <!-- Bone Editor Widget -->
-        <div class="widget" 
-             onmouseenter="showPromoText(this)" 
-             onmouseleave="hidePromoText()"
-             onclick="window.open('https://assetstore.unity.com/preview/308531/1013868')">
-            <div class="badge unity-badge">Unity Asset</div>
-            <div class="widget-content">
-                <h2>Bone Editor KT</h2>
-                <p>A simple and convenient solution for adding, removing, and editing bones.</p>
-                <div class="asset-preview">
-                    <div class="promo-text">
-                        <h3>Bone Editor - Ultimate Skeleton Creation Tool for Unity</h3>
-                        <p>Revolutionize Your 3D Character and Object Rigging with Bone Editor!</p>
-                        <p>Are you tired of spending hours manually rigging skeletons for your 3D models? Do you want a powerful, yet easy-to-use tool that simplifies the process of creating and editing skeletons in Unity? Look no further!</p>
-                        <p>Bone Editor is here to transform your workflow, allowing you to create humanoid rigs, complex skeletons, and more with just a few clicks.</p>
-                        <p>Whether you're working on characters, vehicles, creatures, or mechanical objects, Bone Editor provides the flexibility and automation you need to bring your models to life. With features like automatic vertex binding, bone visualization, and JSON save/load functionality, Bone Editor is the ultimate solution for both beginners and experienced developers.</p>
-                    </div>
+    <section id="about" class="section about-section">
+        <div class="content-box">
+            <h2>About Us</h2>
+            <p>KUBAN TECHNOLOGY - we are a team of dreamers, striving to give the world the best products and revolutionary solutions.</p>
+            <p>The best technologies are available only in Kuban</p>
+        </div>
+    </section>
+
+    <section id="projects" class="section projects-section">
+        <div class="maize-field"></div>
+        <div class="hut"></div>
+        <div class="content-box">
+            <h2>Our Projects</h2>
+            <a href="https://assetstore.unity.com/publishers/111663" target="_blank" class="project-link">Asset Store</a>
+        </div>
+    </section>
+
+    <section id="contacts" class="section contacts-section">
+        <div class="grass-background"></div>
+        <div class="content-box">
+            <h2>Contacts</h2>
+            <div class="contacts-grid">
+                <div class="contact-item email-contact" data-email="managerkdnm@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                    <span>Technical Support</span>
                 </div>
+                <div class="contact-item email-contact" data-email="kdnmgamesdevelop@gmail.com">
+                    <i class="fas fa-handshake"></i>
+                    <span>Cooperation</span>
+                </div>
+                <a href="https://www.youtube.com/@kdnm_studio" target="_blank" class="contact-item">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://kdnm.itch.io" target="_blank" class="contact-item">
+                    <i class="fab fa-itch-io"></i>
+                </a>
+                <a href="https://sidequestvr.com/user/2098884" target="_blank" class="contact-item">
+                    <i class="fas fa-vr-cardboard"></i>
+                </a>
+                <a href="https://boosty.to/kdnm/purchase/2810578?share=subscription_link" target="_blank" class="contact-item">
+                    <i class="fas fa-coins"></i>
+                </a>
+                <a href="https://tiktok.com/@kdnm_tiktok?is_from_webapp=1&sender_device=pc" target="_blank" class="contact-item">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://patreon.com/BloodandFuns93?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink" target="_blank" class="contact-item">
+                    <i class="fab fa-patreon"></i>
+                </a>
             </div>
+            <div id="email-copied-message" class="email-copied-message"></div>
         </div>
-
-        <!-- InDev Widgets -->
-        <div class="widget indev-widget">
-            <div class="badge indev-badge">InDev</div>
-            <div class="widget-content">
-                <h2>Mesh Editor KT</h2>
-            </div>
+        <div class="wooden-fence">
+            <div class="jug"></div>
         </div>
+    </section>
 
-        <div class="widget indev-widget">
-            <div class="badge indev-badge">InDev</div>
-            <div class="widget-content">
-                <h2>Dynamic Collider KT</h2>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>Since ancient times, the Kuban Cossacks have been giving the best technologies to the whole world.</p>
-        <div class="social-links">
-            <a href="https://www.youtube.com/@kdnm_studio" class="social-link"><i class="fab fa-youtube"></i></a>
-            <a href="https://kdnm.itch.io" class="social-link"><i class="fab fa-itch-io"></i></a>
-            <a href="https://sidequestvr.com/user/2098884" class="social-link"><i class="fas fa-vr-cardboard"></i></a>
-            <a href="https://boosty.to/kdnm/purchase/2810578?share=subscription_link" class="social-link"><i class="fas fa-rocket"></i></a>
-            <a href="https://www.tiktok.com/@kdnm_tiktok" class="social-link"><i class="fab fa-tiktok"></i></a>
-            <a href="https://x.com/KDNM102451" class="social-link"><i class="fab fa-x-twitter"></i></a>
-        </div>
-    </footer>
-
-    <script>
-        function showPromoText(widget) {
-            const preview = widget.querySelector('.asset-preview');
-            preview.style.maxHeight = '1000px';
-        }
-
-        function hidePromoText() {
-            document.querySelectorAll('.asset-preview').forEach(preview => {
-                preview.style.maxHeight = '0';
-            });
-        }
-
-        // Mobile Touch Support
-        let touchStartY = 0;
-        document.addEventListener('touchstart', e => {
-            touchStartY = e.touches[0].clientY;
-        });
-
-        document.addEventListener('touchend', e => {
-            const touchEndY = e.changedTouches[0].clientY;
-            if (Math.abs(touchEndY - touchStartY) > 20) {
-                hidePromoText();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
